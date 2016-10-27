@@ -24,6 +24,6 @@ public abstract class CommandLoggerMulti implements ICommandFunction {
         }
     }
 
-    public abstract Map<String, CommandLogger> getLists();
+    public abstract Map<String, ICommandFunction> getLists();
 
 }

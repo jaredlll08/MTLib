@@ -12,7 +12,7 @@ public abstract class CommandLogger implements ICommandFunction {
 
     @Override
     public void execute(String[] strings, IPlayer player) {
-        MineTweakerAPI.logCommand(getList().size() + getName() + ":");
+        MineTweakerAPI.logCommand(getList().size() + " " + getName() + ":");
         for(String entry : getList()) {
             if(!entry.equals(""))
                 MineTweakerAPI.logCommand(entry);
