@@ -21,6 +21,9 @@ version = modVersion
 group = modGroup
 archivesBaseName = modBaseName
 
+if (System.getenv().BUILD_NUMBER != null) {//adds the build number to the end of the version string if on a build server
+    version += ".${System.getenv().BUILD_NUMBER}"
+}
 minecraft {
     version = project.forgeVersion
     runDir = "run"

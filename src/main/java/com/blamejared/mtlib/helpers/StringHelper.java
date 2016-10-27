@@ -1,5 +1,6 @@
 package com.blamejared.mtlib.helpers;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -14,7 +15,7 @@ public class StringHelper {
         return stringList;
     }
     
-    public static String join(List<String> list, String conjunction) {
+    public static String join(Collection<String> list, String conjunction) {
         StringBuilder sb = new StringBuilder();
         if(conjunction == null) {
             conjunction = ", ";
