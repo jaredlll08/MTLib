@@ -11,7 +11,11 @@ buildscript {
     }
 }
 
+apply plugin: "maven"
 apply plugin: "net.minecraftforge.gradle.forge"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 version = modVersion
 group = modGroup
@@ -27,7 +31,20 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    deployerJars
+}
+
 dependencies {
+    deployerJars 'org.apache.maven.wagon:wagon-ftp:2.2'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file:///var/www/html/maven")
+        }
+    }
 }
 
 processResources {
