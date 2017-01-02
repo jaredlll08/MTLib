@@ -2,6 +2,7 @@ package com.blamejared.mtlib.utils;
 
 
 import com.blamejared.mtlib.helpers.LogHelper;
+import minetweaker.MineTweakerAPI;
 
 import java.util.List;
 
@@ -27,7 +28,9 @@ public abstract class BaseListRemoval<T> extends BaseListModification<T> {
         for (T recipe : this.recipes) {
             if (recipe != null) {
                 if (this.list.remove(recipe)) {
+                    
                     successful.add(recipe);
+                    MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(recipe);
                 } else {
                     LogHelper.logError(String.format("Error removing %s Recipe for %s", name, getRecipeInfo(recipe)));
                 }
@@ -46,6 +49,8 @@ public abstract class BaseListRemoval<T> extends BaseListModification<T> {
             if (recipe != null) {
                 if (!list.add(recipe)) {
                     LogHelper.logError(String.format("Error restoring %s Recipe for %s", name, getRecipeInfo(recipe)));
+                }else{
+                    MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe);
                 }
             } else {
                 LogHelper.logError(String.format("Error restoring %s Recipe: null object", name));

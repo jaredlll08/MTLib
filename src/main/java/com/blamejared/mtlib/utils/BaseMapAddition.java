@@ -2,6 +2,7 @@ package com.blamejared.mtlib.utils;
 
 
 import com.blamejared.mtlib.helpers.LogHelper;
+import minetweaker.MineTweakerAPI;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ public abstract class BaseMapAddition<K, V> extends BaseMapModification<K, V> {
             }
             
             successful.put(key, value);
+            MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(value);
         }
     }
 
@@ -52,6 +54,8 @@ public abstract class BaseMapAddition<K, V> extends BaseMapModification<K, V> {
 
             if(value == null) {
                 LogHelper.logError(String.format("Error removing %s Recipe: null object", name));
+            }else {
+                MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(value);
             }
         }
         

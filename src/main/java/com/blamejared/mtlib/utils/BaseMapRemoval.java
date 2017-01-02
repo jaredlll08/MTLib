@@ -2,6 +2,7 @@ package com.blamejared.mtlib.utils;
 
 
 import com.blamejared.mtlib.helpers.LogHelper;
+import minetweaker.MineTweakerAPI;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,6 +31,7 @@ public abstract class BaseMapRemoval<K, V> extends BaseMapModification<K, V> {
             
             if(oldValue != null) {
                 successful.put(key, oldValue);
+                MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(oldValue);
             } else {
                 LogHelper.logError(String.format("Error removing %s Recipe : null object", name));
             }
@@ -46,6 +48,8 @@ public abstract class BaseMapRemoval<K, V> extends BaseMapModification<K, V> {
                 V oldValue = map.put(entry.getKey(), entry.getValue());
                 if(oldValue != null) {
                     LogHelper.logWarning(String.format("Overwritten %s Recipe for %s while restoring.", name, getRecipeInfo(entry)));
+                }else{
+                    MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(oldValue);
                 }
             }
         }
