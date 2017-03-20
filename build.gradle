@@ -32,6 +32,14 @@ minecraft {
 
 repositories {
     mavenCentral()
+	maven {
+    url "http://dvs1.progwml6.com/files/maven"
+}
+}
+
+dependencies {
+   
+    deobfCompile "mezz.jei:jei_1.10.2:3.14.7.416"
 }
 
 configurations {
@@ -41,7 +49,6 @@ configurations {
 dependencies {
     deployerJars 'org.apache.maven.wagon:wagon-ftp:2.2'
 }
-
 uploadArchives {
     repositories {
         mavenDeployer {

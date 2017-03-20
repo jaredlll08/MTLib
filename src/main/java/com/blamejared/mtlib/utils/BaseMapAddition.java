@@ -4,9 +4,7 @@ package com.blamejared.mtlib.utils;
 import com.blamejared.mtlib.helpers.LogHelper;
 import minetweaker.MineTweakerAPI;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 public abstract class BaseMapAddition<K, V> extends BaseMapModification<K, V> {
@@ -22,7 +20,7 @@ public abstract class BaseMapAddition<K, V> extends BaseMapModification<K, V> {
         this(name, map);
         this.recipes.putAll(recipes);
     }
-
+    
     @Override
     public void apply() {
         if(recipes.isEmpty())
@@ -34,28 +32,27 @@ public abstract class BaseMapAddition<K, V> extends BaseMapModification<K, V> {
             V oldValue = map.put(key, value);
             
             if(oldValue != null) {
-                LogHelper.logWarning(String.format("Overwritten %s Recipe for %s", name, getRecipeInfo( new AbstractMap.SimpleEntry<K, V>(entry.getKey(), value))));
+                LogHelper.logWarning(String.format("Overwritten %s Recipe for %s", name, getRecipeInfo(new AbstractMap.SimpleEntry<K, V>(entry.getKey(), value))));
                 overwritten.put(key, oldValue);
             }
-            
             successful.put(key, value);
-            MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(value);
+            MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(wrapRecipe(value) != null ? wrapRecipe(value) : value);
         }
     }
-
+    
     @Override
     public void undo() {
         if(successful.isEmpty() && overwritten.isEmpty())
             return;
-
+        
         for(Entry<K, V> entry : successful.entrySet()) {
             K key = entry.getKey();
             V value = map.remove(key);
-
+            
             if(value == null) {
                 LogHelper.logError(String.format("Error removing %s Recipe: null object", name));
-            }else {
-                MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(value);
+            } else {
+                MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(wrapRecipe(value) != null ? wrapRecipe(value) : value);
             }
         }
         
@@ -69,12 +66,12 @@ public abstract class BaseMapAddition<K, V> extends BaseMapModification<K, V> {
             }
         }
     }
-
+    
     @Override
     public String describe() {
         return String.format("Adding %d %s Recipe(s) for %s", recipes.size(), name, getRecipeInfo());
     }
-
+    
     @Override
     public String describeUndo() {
         return String.format("Removing %d %s Recipe(s) for %s", recipes.size(), name, getRecipeInfo());

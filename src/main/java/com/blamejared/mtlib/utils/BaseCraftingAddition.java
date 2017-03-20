@@ -6,7 +6,7 @@ import net.minecraft.item.crafting.IRecipe;
 import java.util.List;
 
 public abstract class BaseCraftingAddition extends BaseListAddition<IRecipe> {
-
+    
     protected BaseCraftingAddition(String name, List<IRecipe> list) {
         super(name, list);
     }

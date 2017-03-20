@@ -1,10 +1,12 @@
 package com.blamejared.mtlib.utils;
 
-import java.util.HashMap;
-import java.util.Map;
+import mezz.jei.api.recipe.IRecipeWrapper;
+
+import java.util.*;
 import java.util.Map.Entry;
 
 public abstract class BaseMapModification<K, V> extends BaseUndoable {
+    
     protected Map<K, V> map;
     protected final HashMap<K, V> recipes;
     protected final HashMap<K, V> successful;
@@ -15,7 +17,7 @@ public abstract class BaseMapModification<K, V> extends BaseUndoable {
         this.recipes = new HashMap<K, V>();
         this.successful = new HashMap<K, V>();
     }
-
+    
     @Override
     public boolean canUndo() {
         return !recipes.isEmpty();
@@ -23,8 +25,7 @@ public abstract class BaseMapModification<K, V> extends BaseUndoable {
     
     @Override
     protected String getRecipeInfo() {
-        if(!recipes.isEmpty())
-        {
+        if(!recipes.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             for(Entry<K, V> recipe : recipes.entrySet()) {
                 if(recipe != null) {
@@ -51,4 +52,8 @@ public abstract class BaseMapModification<K, V> extends BaseUndoable {
      * infusion recipe.
      */
     protected abstract String getRecipeInfo(Entry<K, V> recipe);
+    
+    public IRecipeWrapper wrapRecipe(V recipe) {
+        return null;
+    }
 }
