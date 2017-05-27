@@ -57,7 +57,7 @@ public class InputHelper {
 
 	public static ItemStack toStack(IItemStack iStack) {
 		if (iStack == null) {
-			return null;
+			return ItemStack.EMPTY;
 		} else {
 			Object internal = iStack.getInternal();
 			if (!(internal instanceof ItemStack)) {
@@ -81,7 +81,7 @@ public class InputHelper {
 	}
 	
 	public static IItemStack toIItemStack(ItemStack stack) {
-	    if(stack == null) {
+	    if(stack.isEmpty()) {
 	        return null;
 	    }
 	    

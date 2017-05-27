@@ -25,7 +25,7 @@ public class BaseCraftingRemoval extends BaseListRemoval<IRecipe> {
         List<IRecipe> recipes = new LinkedList<IRecipe>();
         
         for (IRecipe r : list) {
-            if (r != null && r.getRecipeOutput() != null && r.getRecipeOutput() instanceof ItemStack && matches(ingredient, toIItemStack(r.getRecipeOutput()))) {
+            if (r != null && r.getRecipeOutput() != ItemStack.EMPTY && matches(ingredient, toIItemStack(r.getRecipeOutput()))) {
                 recipes.add(r);
             }
         }

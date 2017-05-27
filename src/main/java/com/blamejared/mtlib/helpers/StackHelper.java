@@ -11,7 +11,7 @@ public class StackHelper {
      * Compares two ItemStack instances, trying to match the referenced item.
      */
 	public static boolean areEqual(ItemStack stack1, ItemStack stack2) {
-		if (stack1 == null || stack2 == null) {
+		if (stack1.isEmpty() || stack2.isEmpty()) {
 			return false;
 		}  else {
 			return stack1.isItemEqual(stack2);
