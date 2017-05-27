@@ -1,18 +1,14 @@
 package com.blamejared.mtlib.helpers;
 
 import minetweaker.api.entity.IEntity;
-import minetweaker.api.item.IIngredient;
-import minetweaker.api.item.IItemStack;
+import minetweaker.api.item.*;
 import minetweaker.api.liquid.ILiquidStack;
 import minetweaker.api.oredict.IOreDictEntry;
 import minetweaker.mc1102.item.MCItemStack;
 import minetweaker.mc1102.liquid.MCLiquidStack;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.item.*;
+import net.minecraftforge.fluids.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -121,8 +117,10 @@ public class InputHelper {
 				return toString((IOreDictEntry) iStack);
 			} else if (iStack instanceof IItemStack) {
 				return toStack((IItemStack) iStack);
-			} else
-				return null;
+            } else if(iStack instanceof IngredientStack) {
+                return ((IngredientStack) iStack).getItems();
+            } else
+                return null;
 		}
 	}
 
