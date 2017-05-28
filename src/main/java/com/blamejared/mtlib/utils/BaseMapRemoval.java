@@ -31,7 +31,7 @@ public abstract class BaseMapRemoval<K, V> extends BaseMapModification<K, V> {
             
             if(oldValue != null) {
                 successful.put(key, oldValue);
-                MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(oldValue);
+                MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(oldValue, getJEICategory(oldValue));
             } else {
                 LogHelper.logError(String.format("Error removing %s Recipe : null object", name));
             }

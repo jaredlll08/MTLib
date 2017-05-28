@@ -1,7 +1,6 @@
 package com.blamejared.mtlib.utils;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public abstract class BaseListModification<T> extends BaseUndoable {
     protected final List<T> list;
@@ -118,5 +117,9 @@ public abstract class BaseListModification<T> extends BaseUndoable {
         }
 
         return true;
+    }
+    
+    public String getJEICategory(T recipe){
+        return "";
     }
 }

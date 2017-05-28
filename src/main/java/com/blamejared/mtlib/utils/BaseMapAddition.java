@@ -39,7 +39,7 @@ public abstract class BaseMapAddition<K, V> extends BaseMapModification<K, V> {
             }
             
             successful.put(key, value);
-            MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(value);
+            MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(value, getJEICategory(value));
         }
     }
 
@@ -55,7 +55,7 @@ public abstract class BaseMapAddition<K, V> extends BaseMapModification<K, V> {
             if(value == null) {
                 LogHelper.logError(String.format("Error removing %s Recipe: null object", name));
             }else {
-                MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(value);
+                MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(value, getJEICategory(value));
             }
         }
         

@@ -1,7 +1,6 @@
 package com.blamejared.mtlib.utils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 public abstract class BaseMapModification<K, V> extends BaseUndoable {
@@ -51,4 +50,8 @@ public abstract class BaseMapModification<K, V> extends BaseUndoable {
      * infusion recipe.
      */
     protected abstract String getRecipeInfo(Entry<K, V> recipe);
+    
+    public String getJEICategory(V recipe) {
+        return "";
+    }
 }
