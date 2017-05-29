@@ -31,7 +31,8 @@ public abstract class BaseMapRemoval<K, V> extends BaseMapModification<K, V> {
             
             if(oldValue != null) {
                 successful.put(key, oldValue);
-                MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(oldValue, getJEICategory(oldValue));
+                if(getJEICategory(oldValue) != null)
+                    MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(oldValue, getJEICategory(oldValue));
             } else {
                 LogHelper.logError(String.format("Error removing %s Recipe : null object", name));
             }
@@ -49,7 +50,8 @@ public abstract class BaseMapRemoval<K, V> extends BaseMapModification<K, V> {
                 if(oldValue != null) {
                     LogHelper.logWarning(String.format("Overwritten %s Recipe for %s while restoring.", name, getRecipeInfo(entry)));
                 }else{
-                    MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(oldValue);
+                    if(getJEICategory(oldValue) != null)
+                        MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(oldValue);
                 }
             }
         }

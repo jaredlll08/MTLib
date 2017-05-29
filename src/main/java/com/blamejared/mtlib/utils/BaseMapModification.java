@@ -52,6 +52,6 @@ public abstract class BaseMapModification<K, V> extends BaseUndoable {
     protected abstract String getRecipeInfo(Entry<K, V> recipe);
     
     public String getJEICategory(V recipe) {
-        return "";
+        return null;
     }
 }

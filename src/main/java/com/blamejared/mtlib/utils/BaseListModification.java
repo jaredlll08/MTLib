@@ -120,6 +120,6 @@ public abstract class BaseListModification<T> extends BaseUndoable {
     }
     
     public String getJEICategory(T recipe){
-        return "";
+        return null;
     }
 }

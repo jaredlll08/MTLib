@@ -29,7 +29,8 @@ public abstract class BaseListAddition<T> extends BaseListModification<T> {
             if(recipe != null) {
                 if(list.add(recipe)) {
                     successful.add(recipe);
-                    MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe, getJEICategory(recipe));
+                    if(getJEICategory(recipe) != null)
+                        MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe, getJEICategory(recipe));
                 } else {
                     LogHelper.logError(String.format("Error adding %s Recipe for %s", name, getRecipeInfo(recipe)));
                 }
@@ -50,7 +51,8 @@ public abstract class BaseListAddition<T> extends BaseListModification<T> {
                 if(!list.remove(recipe)) {
                     LogHelper.logError(String.format("Error removing %s Recipe for %s", name, this.getRecipeInfo(recipe)));
                 }else{
-                    MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(recipe, getJEICategory(recipe));
+                    if(getJEICategory(recipe) != null)
+                        MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(recipe, getJEICategory(recipe));
                 }
             } else {
                 LogHelper.logError(String.format("Error removing %s Recipe: null object", name));
