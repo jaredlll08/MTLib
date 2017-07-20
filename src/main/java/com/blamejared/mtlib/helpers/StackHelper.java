@@ -1,8 +1,7 @@
 package com.blamejared.mtlib.helpers;
 
-import minetweaker.api.item.IIngredient;
-import minetweaker.api.item.IItemStack;
-import minetweaker.api.liquid.ILiquidStack;
+import crafttweaker.api.item.*;
+import crafttweaker.api.liquid.ILiquidStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 

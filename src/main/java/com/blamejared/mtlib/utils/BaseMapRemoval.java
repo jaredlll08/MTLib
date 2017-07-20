@@ -2,10 +2,8 @@ package com.blamejared.mtlib.utils;
 
 
 import com.blamejared.mtlib.helpers.LogHelper;
-import minetweaker.MineTweakerAPI;
 
 import java.util.Map;
-import java.util.Map.Entry;
 
 public abstract class BaseMapRemoval<K, V> extends BaseMapModification<K, V> {
     
@@ -20,7 +18,7 @@ public abstract class BaseMapRemoval<K, V> extends BaseMapModification<K, V> {
             this.recipes.putAll(recipes);
         }
     }
-
+    
     @Override
     public void apply() {
         if(recipes.isEmpty())
@@ -31,28 +29,8 @@ public abstract class BaseMapRemoval<K, V> extends BaseMapModification<K, V> {
             
             if(oldValue != null) {
                 successful.put(key, oldValue);
-                if(getJEICategory(oldValue) != null)
-                    MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(oldValue, getJEICategory(oldValue));
             } else {
                 LogHelper.logError(String.format("Error removing %s Recipe : null object", name));
-            }
-        }
-    }
-    
-    @Override
-    public void undo() {
-        if(successful.isEmpty())
-            return;
-        
-        for(Entry<K, V> entry : successful.entrySet()) {
-            if(entry != null) {
-                V oldValue = map.put(entry.getKey(), entry.getValue());
-                if(oldValue != null) {
-                    LogHelper.logWarning(String.format("Overwritten %s Recipe for %s while restoring.", name, getRecipeInfo(entry)));
-                }else{
-                    if(getJEICategory(oldValue) != null)
-                        MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(oldValue);
-                }
             }
         }
     }
@@ -61,9 +39,5 @@ public abstract class BaseMapRemoval<K, V> extends BaseMapModification<K, V> {
     public String describe() {
         return String.format("Removing %d %s Recipe(s) for %s", recipes.size(), name, getRecipeInfo());
     }
-
-    @Override
-    public String describeUndo() {
-        return String.format("Restoring %d %s Recipe(s) for %s", recipes.size(), name, getRecipeInfo());
-    }
+    
 }

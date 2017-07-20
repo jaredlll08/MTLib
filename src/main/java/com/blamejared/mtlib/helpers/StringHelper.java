@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class StringHelper {
+    
     public static List<String> toLowerCase(List<String> stringList) {
         ListIterator<String> iterator = stringList.listIterator();
         
@@ -33,12 +34,13 @@ public class StringHelper {
     }
     
     public static String wildcardToRegex(String expression) {
-        if(expression == null) return null;
+        if(expression == null)
+            return null;
         
         StringBuilder sb = new StringBuilder();
         sb.append('^');
         
-        for(int i = 0; i < expression.length(); i ++) {
+        for(int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
             
             switch(c) {
@@ -48,8 +50,8 @@ public class StringHelper {
                 case '?':
                     sb.append('.');
                     break;
-                    
-                case '(': 
+                
+                case '(':
                 case ')':
                 case '[':
                 case ']':

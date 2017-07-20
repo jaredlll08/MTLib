@@ -4,9 +4,10 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public abstract class BaseMapModification<K, V> extends BaseUndoable {
-    protected Map<K, V> map;
+    
     protected final HashMap<K, V> recipes;
     protected final HashMap<K, V> successful;
+    protected Map<K, V> map;
     
     protected BaseMapModification(String name, Map<K, V> map) {
         super(name);
@@ -14,16 +15,10 @@ public abstract class BaseMapModification<K, V> extends BaseUndoable {
         this.recipes = new HashMap<K, V>();
         this.successful = new HashMap<K, V>();
     }
-
-    @Override
-    public boolean canUndo() {
-        return !recipes.isEmpty();
-    }
     
     @Override
     protected String getRecipeInfo() {
-        if(!recipes.isEmpty())
-        {
+        if(!recipes.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             for(Entry<K, V> recipe : recipes.entrySet()) {
                 if(recipe != null) {
@@ -51,7 +46,4 @@ public abstract class BaseMapModification<K, V> extends BaseUndoable {
      */
     protected abstract String getRecipeInfo(Entry<K, V> recipe);
     
-    public String getJEICategory(V recipe) {
-        return null;
-    }
 }
