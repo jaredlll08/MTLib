@@ -6,13 +6,17 @@ import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.oredict.IOreDictEntry;
 import crafttweaker.mc1120.item.MCItemStack;
 import crafttweaker.mc1120.liquid.MCLiquidStack;
+import gnu.trove.set.TCharSet;
+import gnu.trove.set.hash.TCharHashSet;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class InputHelper {
     
@@ -137,29 +141,6 @@ public class InputHelper {
         }
     }
     
-    public static Object[] toShapedObjects(IIngredient[][] ingredients) {
-        if(ingredients == null)
-            return null;
-        else {
-            ArrayList prep = new ArrayList();
-            prep.add("abc");
-            prep.add("def");
-            prep.add("ghi");
-            char[][] map = new char[][]{{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};
-            for(int x = 0; x < ingredients.length; x++) {
-                if(ingredients[x] != null) {
-                    for(int y = 0; y < ingredients[x].length; y++) {
-                        if(ingredients[x][y] != null && x < map.length && y < map[x].length) {
-                            prep.add(map[x][y]);
-                            prep.add(toObject(ingredients[x][y]));
-                        }
-                    }
-                }
-            }
-            return prep.toArray();
-        }
-    }
-    
     public static String toString(IOreDictEntry entry) {
         return ((IOreDictEntry) entry).getName();
     }
@@ -184,6 +165,58 @@ public class InputHelper {
         for(int i = 0; i < stack.length; i++)
             stack[i] = toFluid(iStack[i]);
         return stack;
+    }
+
+    public static Object[] toShapedObjects(IIngredient[][] ingredients) {
+        if(ingredients == null)
+            return null;
+        else {
+            ArrayList<Object> prep = new ArrayList<>();
+            TCharSet usedCharSet = new TCharHashSet();
+
+            prep.add("abc");
+            prep.add("def");
+            prep.add("ghi");
+            char[][] map = new char[][]{{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};
+            for(int x = 0; x < ingredients.length; x++) {
+                if(ingredients[x] != null) {
+                    for(int y = 0; y < ingredients[x].length; y++) {
+                        if(ingredients[x][y] != null && x < map.length && y < map[x].length) {
+                            prep.add(map[x][y]);
+                            usedCharSet.add(map[x][y]);
+                            prep.add(InputHelper.toObject(ingredients[x][y]));
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < 3; i++) {
+                StringBuilder sb = new StringBuilder();
+                if (prep.get(i) instanceof String){
+                    String s = (String) prep.get(i);
+                    for (int j = 0; j < 3; j++) {
+                        char c = s.charAt(j);
+                        if (usedCharSet.contains(c)){
+                            sb.append(c);
+                        }else {
+                            sb.append(" ");
+                        }
+                    }
+
+                    prep.set(i, sb.toString());
+                }
+            }
+
+
+            return prep.toArray();
+        }
+    }
+
+    public static <R> NonNullList<R> toNonNullList(R[] items){
+        NonNullList<R> nonNullList = NonNullList.create();
+        Collections.addAll(nonNullList, items);
+
+        return nonNullList;
     }
     
 }
