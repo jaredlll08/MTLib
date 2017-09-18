@@ -32,6 +32,10 @@ minecraft {
 
 repositories {
     mavenCentral()
+
+    maven {
+        url = "http://maven.ic2.player.to/"
+    }
 }
 
 configurations {
@@ -40,6 +44,9 @@ configurations {
 
 dependencies {
     deployerJars 'org.apache.maven.wagon:wagon-ftp:2.2'
+    deobfCompile ('net.sengir.forestry:forestry_1.12.1:5.+') {
+        exclude group: 'mezz.jei'
+    }
 }
 
 uploadArchives {
