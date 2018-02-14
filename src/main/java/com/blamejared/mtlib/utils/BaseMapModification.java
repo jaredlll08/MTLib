@@ -3,7 +3,7 @@ package com.blamejared.mtlib.utils;
 import java.util.*;
 import java.util.Map.Entry;
 
-public abstract class BaseMapModification<K, V> extends BaseUndoable {
+public abstract class BaseMapModification<K, V> extends BaseAction {
     
     protected final HashMap<K, V> recipes;
     protected final HashMap<K, V> successful;

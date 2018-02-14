@@ -2,7 +2,7 @@ package com.blamejared.mtlib.utils;
 
 import java.util.*;
 
-public abstract class BaseListModification<T> extends BaseUndoable {
+public abstract class BaseListModification<T> extends BaseAction {
     
     protected final List<T> list;
     protected final LinkedList<T> recipes;

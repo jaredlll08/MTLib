@@ -5,7 +5,7 @@ import crafttweaker.IAction;
 
 import java.util.LinkedList;
 
-public class BaseMultiModification extends BaseUndoable {
+public class BaseMultiModification extends BaseAction {
     
     protected final LinkedList<IAction> actions;
     

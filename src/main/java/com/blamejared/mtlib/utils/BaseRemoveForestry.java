@@ -6,7 +6,7 @@ import forestry.api.recipes.IForestryRecipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseRemoveForestry<R extends IForestryRecipe> extends BaseUndoable {
+public abstract class BaseRemoveForestry<R extends IForestryRecipe> extends BaseAction {
     protected ICraftingProvider<R> provider;
 
     protected BaseRemoveForestry(String name, ICraftingProvider<R> provider) {
