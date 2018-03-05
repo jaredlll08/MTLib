@@ -1,6 +1,5 @@
 package com.blamejared.mtlib.helpers;
 
-import crafttweaker.api.entity.IEntity;
 import crafttweaker.api.item.*;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.oredict.IOreDictEntry;
@@ -8,9 +7,7 @@ import crafttweaker.mc1120.item.MCItemStack;
 import crafttweaker.mc1120.liquid.MCLiquidStack;
 import gnu.trove.set.TCharSet;
 import gnu.trove.set.hash.TCharHashSet;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.*;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.*;
 
@@ -149,14 +146,14 @@ public class InputHelper {
         if(iStack == null) {
             return null;
         } else
-            return FluidRegistry.getFluidStack(iStack.getName(), iStack.getAmount());
+            return (FluidStack) iStack.getInternal();
     }
     
     public static Fluid getFluid(ILiquidStack iStack) {
         if(iStack == null) {
             return null;
         } else
-            return FluidRegistry.getFluid(iStack.getName());
+            return ((FluidStack) iStack.getInternal()).getFluid();
         
     }
     
