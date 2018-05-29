@@ -9,12 +9,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.oredict.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class LogHelper {
     
@@ -101,6 +98,10 @@ public class LogHelper {
     }
     
     public static String getStackDescription(FluidStack stack) {
+        
+        if(stack == null) {
+            return "null";
+        }
         StringBuilder sb = new StringBuilder();
         
         sb.append("<liquid:").append(stack.getFluid().getName()).append('>');
@@ -113,6 +114,9 @@ public class LogHelper {
     }
     
     public static String getListDescription(List<?> objects) {
+        if(objects == null) {
+            return "null";
+        }
         StringBuilder sb = new StringBuilder();
         
         if(objects.isEmpty()) {
