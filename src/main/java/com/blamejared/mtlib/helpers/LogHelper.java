@@ -74,24 +74,27 @@ public class LogHelper {
             return getListDescription((List) object);
         } else if(object instanceof Object[]) {
             return getListDescription(Arrays.asList((Object[]) object));
-        } else if(object != null) {
-            return "\"" + object.toString() + "\"";
         } else if(object instanceof Ingredient && !((Ingredient) object).apply(ItemStack.EMPTY) && ((Ingredient) object).getMatchingStacks().length > 0) {
             return getStackDescription(((Ingredient) object).getMatchingStacks()[0]);
+        } else if(object != null) {
+            return "\"" + object.toString() + "\"";
         } else {
             return "null";
         }
     }
     
     public static String getStackDescription(IIngredient stack) {
+        if(stack == null)
+            return "null";
+        
         Object internalObject = stack.getInternal();
         
         if(internalObject instanceof ItemStack) {
             return getStackDescription((ItemStack) internalObject);
         } else if(internalObject instanceof FluidStack) {
             return getStackDescription((FluidStack) internalObject);
-        } else if(internalObject instanceof IOreDictEntry) {
-            return getStackDescription(((IOreDictEntry) internalObject).getName());
+        } else if(stack instanceof IOreDictEntry) {
+            return getStackDescription(((IOreDictEntry) stack).getName());
         } else {
             return "null";
         }
