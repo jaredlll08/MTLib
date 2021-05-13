@@ -31,7 +31,7 @@ public abstract class BaseMapAddition<K, V> extends BaseMapModification<K, V> {
             V oldValue = map.put(key, value);
             
             if(oldValue != null) {
-                LogHelper.logWarning(String.format("Overwritten %s Recipe for %s", name, getRecipeInfo(new AbstractMap.SimpleEntry<K, V>(entry.getKey(), value))));
+                LogHelper.logInfo(String.format("Overwritten %s Recipe for %s", name, getRecipeInfo(new AbstractMap.SimpleEntry<K, V>(entry.getKey(), value))));
                 overwritten.put(key, oldValue);
             }
             
